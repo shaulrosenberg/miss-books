@@ -18,6 +18,8 @@
 @import "cmps/book-details.css";
 @import "cmps/user-msg.css";
 @import "cmps/book-edit.css";
+@import "cmps/book-review.css";
+@import "cmps/review-item.css";
 /* @import "cmps/user-msg.css";
 @import "cmps/car-filter.css";
 @import "cmps/car-preview.css";

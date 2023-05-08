@@ -1,5 +1,9 @@
 import { LongTxt } from "../cmps/long-txt.jsx"
+import { AddReview } from "../cmps/add-review.jsx"
+import { ReviewList } from "../cmps/review-list.jsx"
 import { bookService } from "../services/book.service.js"
+import { utilService } from "../services/util.service.js"
+
 
 const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouterDOM
@@ -23,8 +27,20 @@ export function BookDetails() {
         .then(setBook)
         .catch(err => {
             console.log('Had issued in book details:', err);
-            navigate('/car')
+            navigate('/book')
         })
+    }
+
+    function onAddReview(review) {
+        // call book service to add review, bookId is of book.id
+        if(!review.id)  review.id = utilService.makeId()
+        bookService.addReview(book.id, review)
+        .then(setBook)
+    }
+
+    function onRemoveReview(reviewId) {
+        bookService.removeReview(book.id, reviewId)
+        .then(setBook)
     }
 
     function getColorClass() {
@@ -60,6 +76,8 @@ export function BookDetails() {
             {getYearDiff() <= 1 && (<h5>published: {book.publishedDate}(New)</h5>)}
             <h5 className={getColorClass()}>Price: {book.listPrice.amount}</h5>
             <LongTxt txt={book.description} length={20} />
+            <ReviewList reviews={book.reviews || []} onRemoveReview={onRemoveReview}/>
+            <AddReview onSubmit={onAddReview}/>
             <button onClick={onBack}>Back</button>
         </section>
     )

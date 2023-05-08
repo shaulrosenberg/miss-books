@@ -10,6 +10,7 @@ import { AppHeader } from "./cmps/app-header.jsx";
 import { BookDetails } from "./views/book-details.jsx";
 import { UserMsg } from "./cmps/user-msg.jsx";
 import { BookEdit } from "./views/book-edit.jsx";
+import { AddReview } from "./cmps/add-review.jsx";
 // TODO: book edit, 
 
 export function App() {

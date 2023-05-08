@@ -10,7 +10,6 @@ export function BookEdit() {
     const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())
     const navigate = useNavigate()
     const params = useParams()
-    console.log('params:', params)
 
     useEffect(() => {
         if (params.bookId) loadBook()
@@ -32,10 +31,12 @@ export function BookEdit() {
         const value = target.type === 'number' ? (+target.value || '') : target.value
 
         if (field === 'amount' || field === 'isOnSale') {
+            // TODO: handle checkbox checked = 'true/false'
             setBookToEdit(prevBook => ({ ...prevBook, listPrice: { ...prevBook.listPrice, [field]: value } }))
         }
         else if (field === 'authors' || field === 'categories') {
-            
+            const values = value.split(',')
+            setBookToEdit(prevBook => ({ ...prevBook, [field]: values }))
         }
         else {
             setBookToEdit(prevBook => ({ ...prevBook, [field]: value }))

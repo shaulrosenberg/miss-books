@@ -13,6 +13,8 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
+    addReview,
+    removeReview
 }
 
 
@@ -48,6 +50,28 @@ function save(book) {
     } else {
         return storageService.post(BOOK_KEY, book)
     }
+}
+
+function addReview(bookId, review) {
+    return get(bookId)
+        .then(book => {
+            if (!book.reviews) book.reviews = []
+            console.log(review, book)
+            book.reviews.push(review)
+            return book
+        })
+        .then(save)
+}
+
+function removeReview(bookId, reviewId) {
+    return get(bookId)
+        .then(book => {
+            const { reviews } = book
+            const idx = reviews.findIndex(review => review.id === reviewId)
+            reviews.splice(idx, 1)
+            return book
+        })
+        .then(save)
 }
 
 function getEmptyBook(title = '') {
