@@ -6,41 +6,49 @@ import { utilService } from "../services/util.service.js"
 
 
 const { useState, useEffect } = React
-const { useNavigate, useParams } = ReactRouterDOM
+const { useNavigate, useParams, Link } = ReactRouterDOM
 
 
 export function BookDetails() {
 
     const [book, setBook] = useState(null)
+    const [nextBookId, setNextBookId] = useState(null)
+
+    const { bookId } = useParams()
     const navigate = useNavigate()
     const params = useParams()
-    console.log(params)
 
-    // get id from params and render details
+
 
     useEffect(() => {
         loadBook()
-    }, [])
+        loadNextBookId()
+    }, [bookId])
 
     function loadBook() {
         bookService.get(params.bookId)
-        .then(setBook)
-        .catch(err => {
-            console.log('Had issued in book details:', err);
-            navigate('/book')
-        })
+            .then(setBook)
+            .catch(err => {
+                console.log('Had issued in book details:', err);
+                navigate('/book')
+            })
+    }
+
+    function loadNextBookId() {
+        bookService.getNextBookId(bookId)
+            .then(setNextBookId)
     }
 
     function onAddReview(review) {
         // call book service to add review, bookId is of book.id
-        if(!review.id)  review.id = utilService.makeId()
+        if (!review.id) review.id = utilService.makeId()
         bookService.addReview(book.id, review)
-        .then(setBook)
+            .then(setBook)
     }
 
     function onRemoveReview(reviewId) {
         bookService.removeReview(book.id, reviewId)
-        .then(setBook)
+            .then(setBook)
     }
 
     function getColorClass() {
@@ -75,10 +83,14 @@ export function BookDetails() {
             {getYearDiff() > 10 && (<h5>published: {book.publishedDate}(Vintage)</h5>)}
             {getYearDiff() <= 1 && (<h5>published: {book.publishedDate}(New)</h5>)}
             <h5 className={getColorClass()}>Price: {book.listPrice.amount}</h5>
-            <LongTxt txt={book.description} length={20} />
-            <ReviewList reviews={book.reviews || []} onRemoveReview={onRemoveReview}/>
-            <AddReview onSubmit={onAddReview}/>
+            <LongTxt txt={book.description} length={100} />
+            <ReviewList reviews={book.reviews || []} onRemoveReview={onRemoveReview} />
+            <AddReview onSubmit={onAddReview} />
             <button onClick={onBack}>Back</button>
+            <div className="book-details-nav">
+                {/* <Link to={`/book/${prevBookId}`}>Previous book</Link> */}
+                <Link to={`/book/${nextBookId}`}>Next book</Link>
+            </div>
         </section>
     )
 

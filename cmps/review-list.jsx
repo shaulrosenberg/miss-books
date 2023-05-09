@@ -2,6 +2,8 @@ import { ReviewItem } from "./review-item.jsx"
 
 // send onDeleteReview to this component
 export function ReviewList({ reviews, onRemoveReview }) {
+    if(!reviews.length) return <h3>No reviews yet!</h3>
+
     return (
         <ul className="reviews-list">
             {reviews.map(review => (

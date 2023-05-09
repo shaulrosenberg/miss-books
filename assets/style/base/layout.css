@@ -1,6 +1,12 @@
 .main-layout {
     display: grid;
     grid-template-columns: 1.6rem 1fr 1.6rem;
+    align-items: start;
+}
+
+.main-layout.app {
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
 }
 
 .main-layout > * {

@@ -3,8 +3,47 @@ export const utilService = {
     makeLorem,
     getRandomIntInclusive,
     loadFromStorage,
-    saveToStorage
+    saveToStorage,
+    debounce,
+    parseArrayOfObjects
 }
+
+function debounce(func, wait) {
+    let timeout
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout)
+            func(...args)
+        };
+
+        clearTimeout(timeout)
+        timeout = setTimeout(later, wait)
+    }
+}
+
+function parseArrayOfObjects(array) {
+    const result = [];
+
+    array.forEach((item) => {
+        const parsedItem = JSON.parse(item, (key, value) => {
+            // Check if the current value is a stringified object
+            if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
+                try {
+                    return JSON.parse(value); // Parse the stringified object
+                } catch (error) {
+                    // If parsing fails, return the original string value
+                    return value;
+                }
+            }
+            return value;
+        });
+
+        result.push(parsedItem);
+    });
+
+    return result;
+}
+
 
 function makeId(length = 6) {
     var txt = ''

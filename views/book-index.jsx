@@ -1,4 +1,4 @@
-const { Link } = ReactRouterDOM
+const { Link, Outlet } = ReactRouterDOM
 const { useEffect, useState } = React
 
 import { BookFilter } from "../cmps/book-filter.jsx"
@@ -10,7 +10,6 @@ import { BookDetails } from "./book-details.jsx"
 export function BookIndex() {
 
     const [books, setBooks] = useState([])
-    const [selectedBook, setSelectedBook] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
     useEffect(() => {
@@ -38,7 +37,9 @@ export function BookIndex() {
     return (
         <section className="book-index">
             <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-            <Link to="/book/edit">Add Book</Link>
+            <Link to="/book/add" className="index-link">Add Google Book</Link>
+            <Outlet />
+            <Link to="/book/edit" className="index-link">Add Book</Link>
             <BookList books={books} onRemoveBook={onRemoveBook} />
         </section>
     )

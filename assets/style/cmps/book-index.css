@@ -1,0 +1,26 @@
+
+
+
+.index-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 1rem;
+    border: none;
+    text-decoration: none;
+    background-color: rgb(96, 47, 56);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.index-link:hover {
+    background-color: #d798ba;
+}
+
+.index-link:first-of-type {
+    margin-inline-start: 0;
+}

@@ -20,6 +20,9 @@
 @import "cmps/book-edit.css";
 @import "cmps/book-review.css";
 @import "cmps/review-item.css";
+@import "cmps/app-footer.css";
+@import "cmps/book-add.css";
+@import "cmps/book-index.css";
 /* @import "cmps/user-msg.css";
 @import "cmps/car-filter.css";
 @import "cmps/car-preview.css";

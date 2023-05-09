@@ -3,14 +3,17 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
 .book-details h1 {
     color: var(--clr1);
     font-size: 2em;
-    
+
 }
+
 .book-details h5 {
     color: var(--clr2);
 }
+
 .book-details img {
     max-width: 200px;
     display: block;
@@ -25,7 +28,24 @@
     color: green
 }
 
+.book-details a{
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.book-details a:hover {
+    background-color: #45a049;
+}
 
 .book-img {
     position: relative;

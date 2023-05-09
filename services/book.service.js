@@ -1,5 +1,6 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
+import { googleBookService } from './google-book.service.js'
 
 
 const BOOK_KEY = 'bookDB'
@@ -14,7 +15,9 @@ export const bookService = {
     getEmptyBook,
     getDefaultFilter,
     addReview,
-    removeReview
+    removeReview,
+    getNextBookId,
+    addGoogleBook
 }
 
 
@@ -50,6 +53,25 @@ function save(book) {
     } else {
         return storageService.post(BOOK_KEY, book)
     }
+}
+
+function addGoogleBook(book) {
+    // get(book.id) if book already exists we don't add, if it doesn't exist do catch block
+    const { id } = book
+    return get(id)
+        .then(() => console.log('Book already exists...'))
+        .catch(() => {
+            storageService.post(BOOK_KEY, book)
+        })
+}
+
+function getNextBookId(bookId) {
+    return storageService.query(BOOK_KEY)
+        .then(books => {
+            let bookIdx = books.findIndex(book => book.id === bookId)
+            if (bookIdx === books.length - 1) bookIdx = -1
+            return books[bookIdx + 1].id
+        })
 }
 
 function addReview(bookId, review) {
