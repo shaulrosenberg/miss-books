@@ -83,7 +83,7 @@ export function BookDetails() {
             {getYearDiff() > 10 && (<h5>published: {book.publishedDate}(Vintage)</h5>)}
             {getYearDiff() <= 1 && (<h5>published: {book.publishedDate}(New)</h5>)}
             <h5 className={getColorClass()}>Price: {book.listPrice.amount}</h5>
-            <LongTxt txt={book.description} length={100} />
+            <LongTxt txt={book.description || 'no description'} length={100} />
             <button onClick={onBack}>Back</button>
             <ReviewList reviews={book.reviews || []} onRemoveReview={onRemoveReview} />
             <AddReview onSubmit={onAddReview} />
