@@ -41,23 +41,3 @@ function makeData({ volumeInfo, id }) {
         }
     }
 }
-
-
-function getEmptyBook(title = '') {
-    return {
-        title,
-        subtitle: '',
-        authors: [],
-        publishedDate: 1999,
-        description: '',
-        pageCount: 0,
-        categories: [],
-        thumbnail: 'http://coding-academy.org/books-photos/20.jpg',
-        language: 'en',
-        listPrice: {
-            amount: 0,
-            currencyCode: 'EUR',
-            isOnSale: false,
-        }
-    }
-}
