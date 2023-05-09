@@ -1,13 +1,15 @@
 const { useState, useEffect, useRef } = React
+const {useNavigate} = ReactRouterDOM
 
 import { bookService } from "../services/book.service.js"
 import { utilService } from "../services/util.service.js"
 import { googleBookService } from "../services/google-book.service.js"
+import { showSuccessMsg } from "../services/event-bus.service.js"
 
 export function BookAdd() {
     const [searchTxt, setSearchTxt] = useState('')
     const [books, setBooks] = useState(null)
-
+    const navigate = useNavigate()
     useEffect(() => {
 
 
@@ -43,6 +45,8 @@ export function BookAdd() {
         const book = books.find(book => book.id === bookId)
         // bookService.addGoogleBook(book)
         bookService.addGoogleBook(book)
+        showSuccessMsg(`book ID: ${bookId} was added!`)
+        navigate('/book')
     }
 
     return (

@@ -1,8 +1,19 @@
+.book-review {
+    margin-block-start: 2rem;
+    background-color: #e9e3e3;
+    padding: 1rem;
+}
+
 .book-review form {
     display: flex;
     flex-direction: column;
     max-width: 400px;
     margin: 0 auto;
+}
+
+.book-review form div {
+    display: flex;
+    justify-content: space-between;
 }
 
 .book-review form label {
@@ -42,9 +53,5 @@ select:focus {
     border: none;
     color: #6d9bf1;
     cursor: pointer;
-    font-size: 16px;
-}
-
-.book-review button:hover {
-    color: #5792e6;
+    font-size: 1rem;
 }

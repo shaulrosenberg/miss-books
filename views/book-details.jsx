@@ -84,9 +84,9 @@ export function BookDetails() {
             {getYearDiff() <= 1 && (<h5>published: {book.publishedDate}(New)</h5>)}
             <h5 className={getColorClass()}>Price: {book.listPrice.amount}</h5>
             <LongTxt txt={book.description} length={100} />
+            <button onClick={onBack}>Back</button>
             <ReviewList reviews={book.reviews || []} onRemoveReview={onRemoveReview} />
             <AddReview onSubmit={onAddReview} />
-            <button onClick={onBack}>Back</button>
             <div className="book-details-nav">
                 {/* <Link to={`/book/${prevBookId}`}>Previous book</Link> */}
                 <Link to={`/book/${nextBookId}`}>Next book</Link>
